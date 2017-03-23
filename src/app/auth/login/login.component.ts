@@ -65,7 +65,7 @@ export class Login {
       this.router.navigate(['/admin']);
     }
     else if(this.role === 2){
-      this.router.navigate(['/pemerintah']);
+      this.router.navigate(['/gov']);
     }
   }
 

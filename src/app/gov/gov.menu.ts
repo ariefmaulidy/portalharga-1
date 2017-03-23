@@ -15,7 +15,7 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'maps',
+        path: 'infoHarga',
         data: {
           menu: {
             title: 'Info Harga',
@@ -27,7 +27,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'googlemaps',
+            path: 'maps',
             data: {
               menu: {
                 title: 'Map',
@@ -35,7 +35,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'linemaps',
+            path: 'tabel',
             data: {
               menu: {
                 title: 'Tabel',
@@ -45,7 +45,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'editors',
+        path: 'infoPanen',
         data: {
           menu: {
             title: 'Info Panen',
@@ -57,7 +57,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'googlemaps',
+            path: 'maps',
             data: {
               menu: {
                 title: 'Map',
@@ -65,7 +65,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'linemaps',
+            path: 'tabel',
             data: {
               menu: {
                 title: 'Tabel',
@@ -75,7 +75,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'Aspirasi',
+        path: 'feedback',
         data: {
           menu: {
             title: 'Feedback',
@@ -87,7 +87,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'googlemaps',
+            path: 'tabel',
             data: {
               menu: {
                 title: 'Aspirasi',
@@ -95,7 +95,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'linemaps',
+            path: 'maps',
             data: {
               menu: {
                 title: 'Operasi Pasar',

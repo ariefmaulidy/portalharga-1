@@ -36,7 +36,7 @@ export class Gov {
 
   private checkRole(){
     //checking role admin / pemerintah
-    if(this.role === 2){
+    if(this.role === 1){
       this.router.navigate(['/admin']);
     }
   }

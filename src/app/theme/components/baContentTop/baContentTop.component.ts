@@ -14,7 +14,18 @@ export class BaContentTop {
   constructor(private _state:GlobalState) {
     this._state.subscribe('menu.activeLink', (activeLink) => {
       if (activeLink) {
-        this.activePageTitle = activeLink.title;
+        console.log();
+        if(activeLink.route.paths.length === 4){
+          if (activeLink.route.paths[2] === 'infoHarga') {
+            this.activePageTitle = "Info Harga " +activeLink.title;
+          }else if(activeLink.route.paths[2] === 'infoPanen'){
+            this.activePageTitle = "Info Panen " +activeLink.title;            
+          }else if(activeLink.route.paths[2] === 'feedback'){
+            this.activePageTitle = activeLink.title;            
+          }
+        }else{        
+          this.activePageTitle = activeLink.title;
+        }
       }
     });
   }
