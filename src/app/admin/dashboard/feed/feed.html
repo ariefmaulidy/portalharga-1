@@ -1,18 +1,18 @@
 <div class="feed-messages-container">
   <div class="feed-message" *ngFor="let message of feed" (click)="expandMessage(message)">
     <div class="message-icon" *ngIf="message.type == 'text-message'">
-      <img class="photo-icon" src="{{ ( message.author | baProfilePicture ) }}">
+      <img class="photo-icon" src="{{ ( message.picture ) }}">
     </div>
     <div class="message-icon" *ngIf="message.type != 'text-message'">
-      <img class="photo-icon" src="{{ ( message.author | baProfilePicture ) }}">
+      <img class="photo-icon" src="{{ ( message.picture ) }}">
       <span class="sub-photo-icon" [ngClass]="message.type"></span>
     </div>
     <div class="text-block text-message">
       <div class="message-header">
-        <span class="author">{{ message.author }} {{ message.surname}}</span>
+        <span class="author">{{ message.name }} ({{ message.subjek }})</span>
       </div>
       <div class="message-content line-clamp" [ngClass]="{'line-clamp-2' : !message.expanded}">
-        <span *ngIf="message.preview">{{ message.header }} </span>{{ message.text }}
+        <span *ngIf="message.preview">{{ message.subjek }} </span>{{ message.isi }}
       </div>
       <div class="preview" [ngClass]="{'hidden': !message.expanded}" *ngIf="message.preview">
         <a href="{{ message.link }}" target="_blank">
@@ -21,10 +21,10 @@
       </div>
       <div [ngClass]="{'hidden': !message.expanded}" class="message-time">
         <div class="post-time">
-          {{ message.time }}
+          {{ message.datePost }}
         </div>
         <div class="ago-time">
-          {{ message.ago }}
+          {{ message.time }}
         </div>
       </div>
     </div>

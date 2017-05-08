@@ -3,15 +3,13 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DropdownModule} from 'ng2-bootstrap';
+
 //routing
 import { routing }       from './user.routing';
 //components
 import { User } from './user.component';
-import { Pemerintah } from './components/pemerintah/pemerintah.component';
-import { Penyuluh } from './components/penyuluh/penyuluh.component';
-//service
-import { PemerintahService } from './components/pemerintah/pemerintah.service';
-import { PenyuluhService } from './components/penyuluh/penyuluh.service';
+import { Tables } from './components/tables/tables.component';
 
 @NgModule({
   imports: [
@@ -19,16 +17,14 @@ import { PenyuluhService } from './components/penyuluh/penyuluh.service';
     FormsModule,
     NgaModule,
     routing,
+    DropdownModule.forRoot(),
     Ng2SmartTableModule,
   ],
   declarations: [
     User,
-    Pemerintah,
-    Penyuluh
+    Tables
   ],
   providers: [
-    PemerintahService,
-    PenyuluhService,
   ]
 })
 export class UserModule {

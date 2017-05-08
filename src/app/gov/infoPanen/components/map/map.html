@@ -13,10 +13,7 @@
           <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu" dropdownMenu>
-          <li class="dropdown-item"><a href="#">Action</a></li>
-          <li class="dropdown-item"><a href="#">Another action</a></li>
-          <li class="dropdown-item"><a href="#">Something else here</a></li>
-          <li class="dropdown-item"><a href="#">Separated link</a></li>
+          <li *ngFor="let item of komoditas" class="dropdown-item"><a href="#">{{item.name}}</a></li>
         </ul>
       </div>
     </div>

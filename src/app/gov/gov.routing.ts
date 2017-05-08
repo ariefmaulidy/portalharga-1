@@ -10,9 +10,10 @@ export const routes: Routes = [
     component: Gov,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', loadChildren: 'app/gov/dashboard/dashboard.module#DashboardModule' },
+      { path: 'dashboard', loadChildren: 'app/admin/dashboard/dashboard.module#DashboardModule' },
       { path: 'infoPanen', loadChildren: 'app/gov/infoPanen/infoPanen.module#InfoPanenModule' },
       { path: 'infoHarga', loadChildren: 'app/gov/infoHarga/infoHarga.module#InfoHargaModule' },
+      { path: 'komoditas', loadChildren: 'app/admin/komoditas/komoditas.module#KomoditasModule' },
       { path: 'feedback', loadChildren: 'app/gov/feedback/infoHarga.module#InfoHargaModule' }
     ]
   }

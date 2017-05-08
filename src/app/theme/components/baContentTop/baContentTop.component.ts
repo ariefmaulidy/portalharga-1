@@ -19,9 +19,11 @@ export class BaContentTop {
           if (activeLink.route.paths[2] === 'infoHarga') {
             this.activePageTitle = "Info Harga " +activeLink.title;
           }else if(activeLink.route.paths[2] === 'infoPanen'){
-            this.activePageTitle = "Info Panen " +activeLink.title;            
+            this.activePageTitle = "Status Produksi " +activeLink.title;            
           }else if(activeLink.route.paths[2] === 'feedback'){
             this.activePageTitle = activeLink.title;            
+          }else if(activeLink.route.paths[2] === 'user'){
+            this.activePageTitle = "User " +activeLink.title;            
           }
         }else{        
           this.activePageTitle = activeLink.title;

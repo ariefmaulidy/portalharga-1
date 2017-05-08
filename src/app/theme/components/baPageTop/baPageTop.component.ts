@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {GlobalState} from '../../../global.state';
-
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import 'style-loader!./baPageTop.scss';
 
 @Component({
@@ -9,14 +9,23 @@ import 'style-loader!./baPageTop.scss';
   templateUrl: './baPageTop.html',
 })
 export class BaPageTop {
-
+  public photo = '';
+  public decode;
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
-
+  jwtHelper: JwtHelper = new JwtHelper();
+  
   constructor(private _state:GlobalState) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });
+    this.decode = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
+
+    if (this.decode.user_data.picture) {
+      this.photo = this.decode.user_data.picture;
+    }else{
+      this.photo = 'http://localhost:3000/assets/img/app/profile/default.png';
+    }
   }
 
   public toggleMenu() {
@@ -30,6 +39,7 @@ export class BaPageTop {
   }
 
   public signout(){
-    localStorage.removeItem('token');
+    localStorage.removeItem('id_token');
+    // localStorage.clear();
   }
 }

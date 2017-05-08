@@ -9,10 +9,12 @@ $text-color: #ffffff;
   height: 100%;
   width: 100%;
   position: absolute;
-  background-image: url('http://blog.umy.ac.id/nandamakendra/files/2012/10/syuran-2.jpg');
+  background-image: url('http://pedulisehat.info/wp-content/uploads/2015/08/sayur-dan-buah-sehat.jpg');
   background-size:cover;
 }
-
+.form-control{
+  color: $text-color;
+}
 .auth-block {
   width: 540px;
   margin: 0 auto;

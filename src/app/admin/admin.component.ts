@@ -43,8 +43,8 @@ export class Admin {
 
   ngOnInit() {
     this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
-    if (localStorage.getItem('token')) {
-      this.decode = this.jwtHelper.decodeToken(localStorage.getItem('token'));
+    if (localStorage.getItem('id_token')) {
+      this.decode = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
       this.role = this.decode.role;
       this.checkRole()
     }else{

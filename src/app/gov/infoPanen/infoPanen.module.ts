@@ -2,16 +2,14 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { DropdownModule} from 'ng2-bootstrap';
 
 import { routing }       from './infoPanen.routing';
 import { InfoPanen } from './infoPanen.component';
 import { Maps } from './components/map/map.component';
-import { BasicTables } from './components/basicTables/basicTables.component';
-import { HoverTable } from './components/basicTables/components/hoverTable';
-
-import { BasicTablesService } from './components/basicTables/basicTables.service';
+import { Tables } from './components/tables/tables.component';
 
 @NgModule({
   imports: [
@@ -19,16 +17,15 @@ import { BasicTablesService } from './components/basicTables/basicTables.service
     FormsModule,
     NgaModule,
     routing,
-    DropdownModule.forRoot()
+    DropdownModule.forRoot(),
+    Ng2SmartTableModule
   ],
   declarations: [
     InfoPanen,
     Maps,
-    BasicTables,
-    HoverTable
+    Tables
   ],
   providers: [
-    BasicTablesService
   ]
 })
 export class InfoPanenModule {}

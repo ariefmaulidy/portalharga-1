@@ -48,7 +48,7 @@ export const PAGES_MENU = [
         path: 'infoPanen',
         data: {
           menu: {
-            title: 'Info Panen',
+            title: 'Status Produksi',
             icon: 'ion-leaf',
             selected: false,
             expanded: false,
@@ -87,7 +87,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'tabel',
+            path: 'aspirasi',
             data: {
               menu: {
                 title: 'Aspirasi',
@@ -95,7 +95,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'maps',
+            path: 'operasiPasar',
             data: {
               menu: {
                 title: 'Operasi Pasar',
@@ -103,7 +103,19 @@ export const PAGES_MENU = [
             }
           }
         ]
-      }
+      },
+      {
+        path: 'komoditas',
+        data: {
+          menu: {
+            title: 'Komoditas',
+            icon: 'ion-leaf',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
     ]
   }
 ];

@@ -1,0 +1,62 @@
+<div class="widgets">
+
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"></ng2-smart-table>
+    </ba-card>
+  </div>
+
+</div>
+
+<div id="tambah" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-header">
+        <button type="button" (click) = "clearForm()"  class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tambah Komoditas</h4>
+      </div>
+      <div class="modal-body">
+		  <div class="form-group">
+		    <label for="nama">Nama Komoditas</label>
+		    <input [(ngModel)]="nama" [disabled]="submit" type="text" class="form-control">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="satuan">Satuan Komoditas</label>
+		    <select [(ngModel)]="satuan" [disabled]="submit" class="form-control" >
+			    <option value="Kg">Kg</option>
+			    <option value="Kwintal">Kwintal</option>
+			    <option value="Liter">Liter</option>
+			</select>
+		  </div>
+		  <div class="form-group">
+		    <label for="harga">Harga rata-rata saat ini</label>
+		    <input [(ngModel)]="harga" [disabled]="submit" type="number" min="0" class="form-control" id="harga">
+		  </div>
+      </div>
+      <div class="modal-footer">
+        <button (click) = "clearForm()" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button [disabled]="!nama || !harga || !satuan" (click)="onSubmitForm()" type="button" class="btn btn-primary"><i [hidden]="!loading" class="fa fa-gear fa-spin"></i> Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Hapus Permintaan Operasi Pasar</h4>
+      </div>
+      <div class="modal-body">
+		  <p>{{hapusText}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" (click)="deleteOperasiPasarFunction()" class="btn btn-danger">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -24,28 +24,10 @@ export const PAGES_MENU = [
             expanded: false,
             order: 100,
           }
-        },
-        children: [
-          {
-            path: 'pemerintah',
-            data: {
-              menu: {
-                title: 'Pemerintah',
-              }
-            }
-          },
-          {
-            path: 'penyuluh',
-            data: {
-              menu: {
-                title: 'Penyuluh',
-              }
-            }
-          }
-        ]
+        }
       },
       {
-        path: 'editors',
+        path: 'komoditas',
         data: {
           menu: {
             title: 'Komoditas',
@@ -55,19 +37,19 @@ export const PAGES_MENU = [
             order: 100,
           }
         }
-      },
-      {
-        path: 'editors',
-        data: {
-          menu: {
-            title: 'Pasar',
-            icon: 'ion-location',
-            selected: false,
-            expanded: false,
-            order: 100,
-          }
-        }
       }
+      // {
+      //   path: 'editors',
+      //   data: {
+      //     menu: {
+      //       title: 'Pasar',
+      //       icon: 'ion-location',
+      //       selected: false,
+      //       expanded: false,
+      //       order: 100,
+      //     }
+      //   }
+      // }
     ]
   }
 ];

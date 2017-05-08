@@ -1,8 +1,8 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {Http, Headers} from '@angular/http';
-import {Router} from '@angular/router';
-import {AuthHttp, JwtHelper} from 'angular2-jwt';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Http, Headers } from '@angular/http';
+import { JwtHelper } from 'angular2-jwt';
+import { Router } from '@angular/router';
 import { ToastrService } from 'toastr-ng2';
 
 @Component({
@@ -16,14 +16,21 @@ export class Login {
   public role;
   private decode;
   public data:string;
+
   public form:FormGroup;
   public username:AbstractControl;
   public password:AbstractControl;
   public submitted:boolean = false;
-  jwtHelper: JwtHelper = new JwtHelper();
-  public urlLogin = 'http://yippytech.com:5000/api/auth';
 
-  constructor(private router: Router, fb:FormBuilder, private http: Http, private toastr: ToastrService,) {
+  jwtHelper: JwtHelper = new JwtHelper();
+
+  public urlLogin = 'https://ph.yippytech.com:5000/user/auth';
+
+  headers = new Headers({
+    'Content-Type' : 'application/json'
+  });
+
+  constructor(private router: Router, fb:FormBuilder, private http: Http, private toastr: ToastrService) {
     this.form = fb.group({
       'username': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -33,33 +40,33 @@ export class Login {
   }
 
   private authHttpFunction(username, password) {
-    let creds = JSON.stringify({ username: username.value, password: password.value });
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'login_type': '1'
-    });
-    this.http.post(this.urlLogin, creds, {
-      headers: headers
-      })
+    
+    let creds = JSON.stringify({ username: username.value, password: password.value, login_type: 0 });
+
+    this.http.post(this.urlLogin, creds, {headers:this.headers})
       .map(res => res.json())
       .subscribe(data => {
-        this.showError(data.message);
-        this.showError(data.success);
-        if(data.success === true){
-          localStorage.setItem('token', data.token);
-          this.decode = this.jwtHelper.decodeToken(data.token);
-          this.role = this.decode.role;
-          this.checkRole();
+          this.showMessage(data.message);
+          if(data.success === true){
+            localStorage.setItem('id_token', data.token);
+            this.checkRole();
+          }
+        },
+        err =>{
+          this.showMessage(err.message);
         }
-      })
+      )
   }
 
-  private showError(message) {
-    console.log(message);
-    // this.toastr.error(message,'Eror');
+  private showMessage(message) {
+    //showtoastr
+    this.toastr.info(message);
   }
 
   private checkRole(){
+    //decode token form localStorage('id_token')
+    this.decode = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
+    this.role = this.decode.role; 
     //checking role admin / pemerintah
     if (this.role === 1) {
       this.router.navigate(['/admin']);
@@ -74,14 +81,11 @@ export class Login {
     if (this.form.valid) {
       this.authHttpFunction(this.username,this.password);
     }
-    this.showError('test');
   }
 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
-      this.decode = this.jwtHelper.decodeToken(localStorage.getItem('token'));
-      this.role = this.decode.role;
-      this.checkRole()
+    if (localStorage.getItem('id_token')) {
+      this.checkRole();
     }
   }
 }

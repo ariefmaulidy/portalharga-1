@@ -18,6 +18,8 @@ export class Auth {
   }
 
   private checkRole(){
+    this.decode = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
+    this.role = this.decode.role;
     //checking role admin / pemerintah
     if (this.role === 1) {
       this.router.navigate(['/admin']);
@@ -28,9 +30,7 @@ export class Auth {
   }
 
   ngOnInit() {
-  	if (localStorage.getItem('token')) {
-      this.decode = this.jwtHelper.decodeToken(localStorage.getItem('token'));
-      this.role = this.decode.role;
+  	if (localStorage.getItem('id_token')) {
       this.checkRole()
     }
   }

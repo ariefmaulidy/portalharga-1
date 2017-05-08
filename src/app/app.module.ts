@@ -24,6 +24,8 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { ToastrModule } from 'toastr-ng2';
 import { provideAuth } from 'angular2-jwt';
 
+import { DataService } from './data/data.service';
+
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
@@ -59,7 +61,15 @@ export type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AUTH_PROVIDERS,
+    provideAuth({
+      headerName: "Authorization",
+      headerPrefix: "Bearer",
+      globalHeaders: [{'Content-Type':'application/json'}],
+      noJwtError: true,
+      noTokenScheme: true
+    })
   ]
 })
 
