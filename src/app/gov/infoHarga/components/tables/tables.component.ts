@@ -83,7 +83,7 @@ export class Tables {
       .map(res => res.json())
       .subscribe(data => {
         localStorage.setItem('id_token', data.token);
-        localStorage.setItem('laporanHarga', JSON.stringify(data.data));
+        localStorage.setItem('infoHarga', JSON.stringify(data.data));
         this.source.load(data.data);
         console.log(data.data);
         this.data.showMessage(data.message);
@@ -140,8 +140,8 @@ export class Tables {
 
   constructor(public authHttp: AuthHttp, public data: DataService) {
     //get data in localStorage('komoditas')
-    if (localStorage.getItem('laporanHarga')) {
-      this.source.load(JSON.parse(localStorage.getItem('laporanHarga')));
+    if (localStorage.getItem('infoHarga')) {
+      this.source.load(JSON.parse(localStorage.getItem('infoHarga')));
     }
     //get data from database
     this.getLaporanHargaFunction();

@@ -1,14 +1,14 @@
   <div class="row" style="margin-bottom: 10px;">
     <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
       <div class="btn-group" role="group" aria-label="Basic example" style="margin-right: 10px;">
-        <button type="button" class="btn btn-primary">Info Harga</button>
-        <button type="button" class="btn">Info Produksi</button>
+        <button [class.btn-primary]="type == 'infoHarga'" (click)="setType('infoHarga')" type="button" class="btn ">Info Harga</button>
+        <button [class.btn-primary]="type == 'infoPanen'" (click)="setType('infoPanen')" type="button" class="btn">Info Produksi</button>
       </div>
 
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary">Hari ini</button>
-        <button type="button" class="btn">Minggu ini</button>
-        <button type="button" class="btn">Bulan ini</button>
+      <div [hidden]="type == 'infoPanen'" class="btn-group" role="group" aria-label="Basic example">
+        <button [class.btn-primary]="day == '0'" type="button" (click)="setDay('0')" class="btn btn-primary">Hari ini</button>
+        <button [class.btn-primary]="day == '7'" type="button" (click)="setDay('7')" class="btn">Minggu ini</button>
+        <button [class.btn-primary]="day == '30'" type="button" (click)="setDay('30')" class="btn">Bulan ini</button>
       </div>
 
       <div class="btn-group flex-dropdown pull-right" dropdown>
