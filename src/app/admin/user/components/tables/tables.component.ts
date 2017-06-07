@@ -38,29 +38,23 @@ export class Tables {
       confirmDelete: true
     },
     columns: {
-      user_id: {
-        title: 'ID',
-        type: 'number',
-        sortDirection: 'asc',
-        editable: false
-      },
-      role: {
-        title: 'Role',
-        type: 'string',
-        editor: {
-          type: 'list',
-          config: {
-            list: [
-              { value: '1', title: 'Admin' }, 
-              { value: '2', title: 'Pemerintah' }, 
-              { value: '3', title: 'Penyuluh' }, 
-              { value: '4', title: 'Petani' }, 
-              { value: '5', title: 'Masyarakat' },
-              { value: '6', title: 'Pedagang' }
-            ]
-          }
-        }
-      },
+      // role: {
+      //   title: 'Role',
+      //   type: 'string',
+      //   editor: {
+      //     type: 'list',
+      //     config: {
+      //       list: [
+      //         { value: '1', title: 'Admin' }, 
+      //         { value: '2', title: 'Pemerintah' }, 
+      //         { value: '3', title: 'Penyuluh' }, 
+      //         { value: '4', title: 'Petani' }, 
+      //         { value: '5', title: 'Masyarakat' },
+      //         { value: '6', title: 'Pedagang' }
+      //       ]
+      //     }
+      //   }
+      // },
       username: {
         title: 'Username',
         type: 'string',

@@ -8,7 +8,6 @@ import { DropdownModule} from 'ng2-bootstrap';
 
 import { routing }       from './infoHarga.routing';
 import { InfoHarga } from './infoHarga.component';
-import { Maps } from './components/map/map.component';
 import { Tables } from './components/tables/tables.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { Tables } from './components/tables/tables.component';
   ],
   declarations: [
     InfoHarga,
-    Maps,
     Tables
   ],
   providers: [

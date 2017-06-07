@@ -5,30 +5,32 @@ $text-color: #ffffff;
 
 .auth-main {
   display: flex;
-  align-items: center;
   height: 100%;
   width: 100%;
   position: absolute;
-  background-image: url('http://pedulisehat.info/wp-content/uploads/2015/08/sayur-dan-buah-sehat.jpg');
+  background-color: #aee06d;
   background-size:cover;
 }
 .form-control{
-  color: $text-color;
+  color: black;
 }
+.form-control:empty{
+  background-color: #white;
+}
+
 .auth-block {
-  width: 540px;
-  margin: 0 auto;
+  width: 320px;
   border-radius: 5px;
-  @include bg-translucent-dark(0.55);
+  @include bg-translucent-white(0.55);
   color: #fff;
   padding: 32px;
   h1 {
     font-weight: $font-light;
-    margin-bottom: 28px;
-    text-align: center;
   }
   p {
-    font-size: 16px;
+    font-weight: $font-light;
+    color: black;
+    font-size: 12px;
   }
   a {
     text-decoration: none;
@@ -42,7 +44,7 @@ $text-color: #ffffff;
 
   .control-label {
     padding-top: 11px;
-    color: $text-color;
+    color: black;
   }
 
   .form-group {
@@ -62,7 +64,9 @@ $text-color: #ffffff;
     outline: none;
   }
 }
-
+.btn{
+    font-weight: $font-light;
+}
 a.forgot-pass {
   display: block;
   text-align: right;

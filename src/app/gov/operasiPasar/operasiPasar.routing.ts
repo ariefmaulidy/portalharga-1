@@ -1,15 +1,16 @@
 import { Routes, RouterModule }  from '@angular/router';
 
-import { InfoHarga } from './infoHarga.component';
+import { OperasiPasar } from './operasiPasar.component';
 import { Tables } from './components/tables/tables.component';
+
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
     path: '',
-    component: InfoHarga,
+    component: OperasiPasar,
     children: [
-      { path: '', component: Tables }
+      { path: '', component: Tables },
     ]
   }
 ];

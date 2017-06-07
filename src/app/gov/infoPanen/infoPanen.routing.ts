@@ -11,8 +11,7 @@ const routes: Routes = [
     path: '',
     component: InfoPanen,
     children: [
-      { path: 'tabel', component: Tables },
-      { path: 'maps', component: Maps }
+      { path: '', component: Tables }
     ]
   }
 ];

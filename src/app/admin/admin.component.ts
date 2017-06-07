@@ -18,9 +18,9 @@ import { PAGES_MENU } from './admin.menu';
       </div>
     </div>
     <footer class="al-footer clearfix">
-      <div class="al-footer-right">Created with <i class="ion-heart"></i></div>
+      <div class="al-footer-right">Irmusyafa © 2017</div>
       <div class="al-footer-main clearfix">
-        <div class="al-copy">&copy; <a href="">Portal Harga | Admin Side</a> ©2017</div>
+        <div class="al-copy">&copy; <a href="">Portal Harga | Admin</a> </div>
       </div>
     </footer>
     <ba-back-top position="200"></ba-back-top>

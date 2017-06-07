@@ -47,12 +47,19 @@ export class DataService {
     if (!tokenNotExpired()) {
       localStorage.clear();
       this.router.navigate(['/']);
-      this.showMessage('Session Expired');
+      this.showMessageError('Session Expired');
     }
   }
 
   public showMessage(message) {
-    this.toastr.info(message);
+    this.toastr.success(message,'Message!');
   }
 
+  public showMessageSuccess(message) {
+    this.toastr.success(message,'Success!');
+  }
+
+  public showMessageError(message) {
+    this.toastr.error(message,'Error!');
+  }
 }

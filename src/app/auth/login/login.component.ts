@@ -16,6 +16,7 @@ export class Login {
   public role;
   private decode;
   public data:string;
+  public progress:boolean = false;
 
   public form:FormGroup;
   public username:AbstractControl;
@@ -46,21 +47,27 @@ export class Login {
     this.http.post(this.urlLogin, creds, {headers:this.headers})
       .map(res => res.json())
       .subscribe(data => {
-          this.showMessage(data.message);
           if(data.success === true){
             localStorage.setItem('id_token', data.token);
             this.checkRole();
+          }else{
+            this.showMessageError('Sign in Failed')
           }
+          this.progress = false;
         },
         err =>{
-          this.showMessage(err.message);
+          this.showMessageError(err.message);
+          this.progress = false;
         }
       )
   }
 
-  private showMessage(message) {
-    //showtoastr
-    this.toastr.info(message);
+  public showMessageSuccess(message) {
+    this.toastr.success(message,'Success!');
+  }
+
+  public showMessageError(message) {
+    this.toastr.error(message,'Error!');
   }
 
   private checkRole(){
@@ -70,13 +77,18 @@ export class Login {
     //checking role admin / pemerintah
     if (this.role === 1) {
       this.router.navigate(['/admin']);
+      this.showMessageSuccess("Selamat datang di Portal Harga");
     }
     else if(this.role === 2){
       this.router.navigate(['/gov']);
+      this.showMessageSuccess("Selamat datang di Portal Harga");
+    }else{
+      this.showMessageError("Anda tidak memilik akses");
     }
   }
 
   private onSubmit(values:Object):void {
+    this.progress = true;
     this.submitted = true;
     if (this.form.valid) {
       this.authHttpFunction(this.username,this.password);

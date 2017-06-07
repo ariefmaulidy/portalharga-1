@@ -1,27 +1,33 @@
 <div class="auth-main">
   <div class="auth-block">
-    <h1>Sign in with <b>PortalHarga</b> Account</h1>
+    <div class="row">
+      <div class="col col-md-3">
+        
+      </div>
+      <div class="col col-md-9">
+        <h1>Portal Harga</h1>
+        <p>&nbsp;Pemerintah & Admin </p>
+      </div>
+    </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+
       <div class="form-group row" [ngClass]="{'has-error': (!username.valid && username.touched), 'has-success': (username.valid && username.touched)}">
-        <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
-
-        <div class="col-sm-10">
-          <input [formControl]="username" class="form-control" id="inputEmail3" placeholder="Username">
-        </div>
+        <label class=" control-label">Username</label>
+        <input [formControl]="username" class="form-control" placeholder="Username">
       </div>
+
       <div class="form-group row" [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}">
-        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <label class=" control-label">Password</label>
+        <input [formControl]="password" type="password" class="form-control" placeholder="Password">
+      </div>
 
-        <div class="col-sm-10">
-          <input [formControl]="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
-        </div>
-      </div>
       <div class="form-group row">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">Sign in</button>
+          <button [disabled]="!form.valid" type="submit" class="btn btn-success btn-block btn-raised btn-lg"><i class="fa fa-spinner fa-spin" [hidden]="!progress" aria-hidden="true"></i> Sign in</button>
           <!-- <a routerLink="/login" class="forgot-pass">Forgot password?</a> -->
-        </div>
       </div>
+
+      <hr>
+      <p align="center"> Portal Harga © 2017</p>
     </form>
   </div>
 </div>

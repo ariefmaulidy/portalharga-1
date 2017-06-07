@@ -3,10 +3,10 @@ export const PAGES_MENU = [
     path: 'gov',
     children: [
       {
-        path: 'dashboard',
+        path: 'beranda',
         data: {
           menu: {
-            title: 'Dashboard',
+            title: 'Beranda',
             icon: 'ion-android-home',
             selected: false,
             expanded: false,
@@ -15,94 +15,52 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'infoHarga',
+        path: 'info-harga',
         data: {
           menu: {
             title: 'Info Harga',
-            icon: 'ion-person',
+            icon: 'ion-social-usd',
             selected: false,
             expanded: false,
-            order: 100,
+            order: 0,
           }
-        },
-        children: [
-          {
-            path: 'maps',
-            data: {
-              menu: {
-                title: 'Map',
-              }
-            }
-          },
-          {
-            path: 'tabel',
-            data: {
-              menu: {
-                title: 'Tabel',
-              }
-            }
-          }
-        ]
+        }
       },
       {
-        path: 'infoPanen',
+        path: 'info-panen',
         data: {
           menu: {
-            title: 'Status Produksi',
-            icon: 'ion-leaf',
+            title: 'Info Panen',
+            icon: 'ion-stats-bars',
             selected: false,
             expanded: false,
-            order: 100,
+            order: 0,
           }
-        },
-        children: [
-          {
-            path: 'maps',
-            data: {
-              menu: {
-                title: 'Map',
-              }
-            }
-          },
-          {
-            path: 'tabel',
-            data: {
-              menu: {
-                title: 'Tabel',
-              }
-            }
-          }
-        ]
+        }
       },
       {
-        path: 'feedback',
+        path: 'aspirasi',
         data: {
           menu: {
-            title: 'Feedback',
-            icon: 'ion-location',
+            title: 'Aspirasi',
+            icon: 'ion-paper-airplane',
             selected: false,
             expanded: false,
-            order: 100,
+            order: 0,
           }
-        },
-        children: [
-          {
-            path: 'aspirasi',
-            data: {
-              menu: {
-                title: 'Aspirasi',
-              }
-            }
-          },
-          {
-            path: 'operasiPasar',
-            data: {
-              menu: {
-                title: 'Operasi Pasar',
-              }
-            }
+        }
+      },
+      {
+        path: 'operasi-pasar',
+        data: {
+          menu: {
+            title: 'Operasi Pasar',
+            icon: 'ion-ios-cart',
+            selected: false,
+            expanded: false,
+            order: 0,
           }
-        ]
+        }
       },
       {
         path: 'komoditas',

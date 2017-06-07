@@ -1,9 +1,8 @@
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import 'style-loader!./tables.scss';
 
@@ -17,8 +16,6 @@ import { DataService } from '../../../../data/data.service';
 })
 
 export class Tables {
-  @ViewChild('childModal') public childModal:ModalDirective;
-
   public query: string = '';
   public jQuery:any;
   public loading = false;
@@ -46,32 +43,37 @@ export class Tables {
       confirmDelete: true
     },
     columns: {
-      name: {
-        title: 'Nama Komoditas',
+      namaKomoditas: {
+        title: 'Komoditas',
         type: 'string'
       },
-      harga: {
-        title: 'Harga (Rp)',
-        type: 'number'
+      nama: {
+        title: 'Nama User',
+        type: 'string'
       },
-      satuan: {
-        title: 'Satuan',
-        type: 'number',
-        editor: {
-          type: 'list',
-          config: {
-            list: [{ value: 'Kg', title: 'Kg' }, { value: 'Liter', title: 'Liter' }, {
-              value: 'Kwintal',
-              title: 'Kwintal',
-            }],
-          }
-        }
+      pesan: {
+        title: 'Pesan',
+        type: 'string'
+      }, 
+      alamat: {
+        title: 'Alamat',
+        type: 'string'
+      }, 
+      totalPendukung: {
+        title: 'Total Pendukung',
+        type: 'string'
       },
-      last_update: {
-        title: 'Last Update',
+      datePost: {
+        title: 'Date Post',
         type: 'string',
-        editable: false
+        editable: false,
+        sortDirection: 'desc'
       }
+    },
+    actions: {
+      add: false,
+      edit: false,
+      delete: false
     },
     pager: {
       perPage: 5
@@ -80,20 +82,21 @@ export class Tables {
 
   source: LocalDataSource = new LocalDataSource();
   
-  private getKomoditasFunction() {
-    this.authHttp.get(this.data.urlGetKomoditas)
+  private getOperasiPasarFunction() {
+    this.authHttp.get(this.data.urlGetOperasiPasar)
       .map(res => res.json())
       .subscribe(data => {
         localStorage.setItem('id_token', data.token);
-        localStorage.setItem('komoditas', JSON.stringify(data.data));
+        localStorage.setItem('operasiPasar', JSON.stringify(data.data));
         this.source.load(data.data);
+        console.log(data.data);
         this.data.showMessage(data.message);
       })
   }
 
-  private updateKomoditasFunction(data) {
-    let creds = JSON.stringify({ komoditas_id: data.komoditas_id, name: data.name, satuan: data.satuan, harga: data.harga });
-    this.authHttp.post(this.data.urlUpdateKomoditas, creds)
+  private updateOperasiPasarFunction(data) {
+    let creds = JSON.stringify({ operasiPasar_id: data.operasiPasar_id, name: data.name, satuan: data.satuan, harga: data.harga });
+    this.authHttp.post(this.data.urlUpdateOperasiPasar, creds)
       .map(res => res.json())
       .subscribe(data => {
         localStorage.setItem('id_token', data.token);
@@ -103,27 +106,27 @@ export class Tables {
     return 1;
   }
 
-  private addKomoditasFunction() {
+  private addOperasiPasarFunction() {
     let creds = JSON.stringify({name: this.nama, satuan: this.satuan, harga: this.harga });
-    this.authHttp.post(this.data.urlAddKomoditas, creds)
+    this.authHttp.post(this.data.urlAddOperasiPasar, creds)
       .map(res => res.json())
       .subscribe(data => {
         localStorage.setItem('id_token', data.token);
-        this.data.showMessage(data.message);
-        this.getKomoditasFunction();
+        this.data.showMessage(data.message);        
+        this.getOperasiPasarFunction();
       })
 
     this.clearForm();
   }
 
-  private deleteKomoditasFunction() {
-    let creds = JSON.stringify({komoditas_id: this.deleteId });
-    this.authHttp.post(this.data.urlDeleteKomoditas, creds)
+  private deleteOperasiPasarFunction() {
+    let creds = JSON.stringify({operasiPasar_id: this.deleteId });
+    this.authHttp.post(this.data.urlDeleteOperasiPasar, creds)
       .map(res => res.json())
       .subscribe(data => {
         localStorage.setItem('id_token', data.token);
-        this.data.showMessage(data.message);
-        this.getKomoditasFunction();
+        this.data.showMessage(data.message);        
+        this.getOperasiPasarFunction();
       })
 
     this.clearForm();
@@ -138,16 +141,16 @@ export class Tables {
   }
 
   constructor(public authHttp: AuthHttp, public data: DataService) {
-    //get data in localStorage('komoditas')
-    if (localStorage.getItem('komoditas')) {
-      this.source.load(JSON.parse(localStorage.getItem('komoditas')));
+    //get data in localStorage('operasiPasar')
+    if (localStorage.getItem('operasiPasar')) {
+      this.source.load(JSON.parse(localStorage.getItem('operasiPasar')));
     }
     //get data from database
-    this.getKomoditasFunction();
+    this.getOperasiPasarFunction();
   }
 
   onSaveConfirm(event): void {
-    if(this.updateKomoditasFunction(event.newData)){
+    if(this.updateOperasiPasarFunction(event.newData)){
       event.confirm.resolve();
     }else{
       event.confirm.reject();
@@ -157,14 +160,12 @@ export class Tables {
   onSubmitForm(){
     this.loading = true;
     this.submit = true;
-    this.addKomoditasFunction();
+    this.addOperasiPasarFunction();
   }
 
   onDeleteConfirm(event): void {
-    this.hapusText = "Apa anda yakin menghapus komoditas " + event.data.name + ' ?'
-    this.deleteId = event.data.komoditas_id;
-    // jQuery("#delete").modal("show");
-    this.childModal.show();
+    this.hapusText = "Apa anda yakin menghapus permintaan operasi pasar dari " + event.data.nama + ' di ' + event.data.alamat + ' ?'
+    this.deleteId = event.data.operasiPasar_id;    
   }
 }
 // irmusyafa.dev

@@ -9,12 +9,13 @@ export const routes: Routes = [
     path: 'gov',
     component: Gov,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', loadChildren: 'app/admin/dashboard/dashboard.module#DashboardModule' },
-      { path: 'infoPanen', loadChildren: 'app/gov/infoPanen/infoPanen.module#InfoPanenModule' },
-      { path: 'infoHarga', loadChildren: 'app/gov/infoHarga/infoHarga.module#InfoHargaModule' },
-      { path: 'komoditas', loadChildren: 'app/admin/komoditas/komoditas.module#KomoditasModule' },
-      { path: 'feedback', loadChildren: 'app/gov/feedback/infoHarga.module#InfoHargaModule' }
+      { path: '', redirectTo: 'beranda', pathMatch: 'full' },
+      { path: 'beranda', loadChildren: 'app/gov/dashboard/dashboard.module#DashboardModule' },
+      { path: 'aspirasi', loadChildren: 'app/gov/aspirasi/aspirasi.module#AspirasiModule' },
+      { path: 'operasi-pasar', loadChildren: 'app/gov/operasiPasar/operasiPasar.module#OperasiPasarModule' },
+      { path: 'info-panen', loadChildren: 'app/gov/infoPanen/infoPanen.module#InfoPanenModule' },
+      { path: 'info-harga', loadChildren: 'app/gov/infoHarga/infoHarga.module#InfoHargaModule' },
+      { path: 'komoditas', loadChildren: 'app/admin/komoditas/komoditas.module#KomoditasModule' }
     ]
   }
 ];

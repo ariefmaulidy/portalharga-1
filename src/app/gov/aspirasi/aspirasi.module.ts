@@ -6,8 +6,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { DropdownModule} from 'ng2-bootstrap';
 
-import { routing }       from './infoPanen.routing';
-import { InfoPanen } from './infoPanen.component';
+import { routing }       from './aspirasi.routing';
+import { Aspirasi } from './aspirasi.component';
+
 import { Tables } from './components/tables/tables.component';
 
 @NgModule({
@@ -20,10 +21,10 @@ import { Tables } from './components/tables/tables.component';
     Ng2SmartTableModule
   ],
   declarations: [
-    InfoPanen,
+    Aspirasi,
     Tables
   ],
   providers: [
   ]
 })
-export class InfoPanenModule {}
+export class AspirasiModule {}
