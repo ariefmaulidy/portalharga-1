@@ -1,8 +1,9 @@
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 import 'style-loader!./tables.scss';
 
@@ -11,17 +12,32 @@ import { DataService } from '../../../../data/data.service';
 @Component({
   selector: 'tables',
   providers: [DataService],
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './tables.html',
 })
 
 export class Tables {
+  @ViewChild('childModal') public childModal:ModalDirective;
+
   public dropdown;
   public user;
   public satu;
   public role:number = 1;
   query: string = '';
-  public urlGetKomoditas = 'https://ph.yippytech.com:5000/user/get';
   
+  public add = false;
+  public loading = false;
+  public submit = false;
+  public hapusText;
+
+  public name;
+  public username;
+  public email;
+  public password;
+  public peran = 0; 
+
+  public deleteId;
+
   settings = {
     add: {
       addButtonContent: '',
@@ -54,6 +70,11 @@ export class Tables {
       //       ]
       //     }
       //   }
+      // },
+      // user_id: {
+      //   title: 'user_id',
+      //   type: 'string',
+      //   editable: false
       // },
       username: {
         title: 'Username',
@@ -91,6 +112,15 @@ export class Tables {
 
   source: LocalDataSource = new LocalDataSource();
   
+  public showForm(x){
+    this.name = '';
+    this.username = '';
+    this.password = '';
+    this.peran = 0;
+    this.email = '';
+    this.add = x;
+  }
+
   private getUserAllFunction() {
     this.authHttp.get(this.data.urlGetUserRole + this.role)
       .map(res => res.json())
@@ -112,33 +142,37 @@ export class Tables {
       })
   }
 
-  // private addKomoditasFunction() {
-  //   let creds = JSON.stringify({name: this.nama, satuan: this.satuan, harga: this.harga });
-  //   this.authHttp.post(this.data.urlAddKomoditas, creds)
-  //     .map(res => res.json())
-  //     .subscribe(data => {
-  //       localStorage.setItem('id_token', data.token);
-  //       this.data.showMessage(data.message);
-  //       jQuery("#tambah").modal("hide");
-  //       this.getKomoditasFunction();
-  //     })
+  private addUserFunction() {
+    let creds = JSON.stringify({username: this.username, role: this.peran, password: this.password, email: this.email, name: this.name });
+    this.authHttp.post(this.data.urlAddUser, creds)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data.showMessageSuccess(data.message);
+        this.getUserAllFunction();
+        this.loading = false;
+        this.submit = false;
+        this.add = false
+      })
+    console.log(creds);
+  }
 
-  //   this.clearForm();
-  // }
+  onSubmitForm(){
+    this.loading = true;
+    this.submit = true;
+    this.addUserFunction();
+  }
 
-  // private deleteKomoditasFunction() {
-  //   let creds = JSON.stringify({komoditas_id: this.deleteId });
-  //   this.authHttp.post(this.data.urlDeleteKomoditas, creds)
-  //     .map(res => res.json())
-  //     .subscribe(data => {
-  //       localStorage.setItem('id_token', data.token);
-  //       this.data.showMessage(data.message);
-  //       jQuery("#delete").modal("hide");
-  //       this.getKomoditasFunction();
-  //     })
+  private deleteUserFunction() {
+    let creds = JSON.stringify({user_id: this.deleteId });
+    this.authHttp.post(this.data.urlDeleteUser, creds)
+      .map(res => res.json())
+      .subscribe(data => {
+        localStorage.setItem('id_token', data.token);
+        this.data.showMessageSuccess(data.message);
+        this.getUserAllFunction();
+      })
+  }
 
-  //   this.clearForm();
-  // }
   setRole(id){
     this.role = id;
     this.dropdown = this.data.user[this.role - 1].text;
@@ -147,6 +181,7 @@ export class Tables {
     }
     this.getUserAllFunction();
   }
+  
   constructor(public authHttp: AuthHttp, public data: DataService) {
     this.dropdown = this.data.user[this.role - 1].text;
     this.user = this.data.user;
@@ -157,11 +192,11 @@ export class Tables {
   }
 
   onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
+    this.hapusText = "Apa anda yakin menghapus pengguna " + event.data.name + ' ?';
+    this.deleteId = event.data.user_id;
+    console.log(this.deleteId);
+    // jQuery("#delete").modal("show");
+    this.childModal.show();
   }
 }
 

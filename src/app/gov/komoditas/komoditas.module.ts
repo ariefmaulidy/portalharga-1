@@ -3,14 +3,15 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { DropdownModule} from 'ng2-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 //routing
-import { routing }       from './user.routing';
+import { routing } from './komoditas.routing';
 //components
-import { User } from './user.component';
+import { Komoditas } from './komoditas.component';
 import { Tables } from './components/tables/tables.component';
+//service
+import { DataService } from '../../data/data.service';
 
 @NgModule({
   imports: [
@@ -18,16 +19,16 @@ import { Tables } from './components/tables/tables.component';
     FormsModule,
     NgaModule,
     routing,
-    DropdownModule.forRoot(),
     Ng2SmartTableModule,
     ModalModule.forRoot()
   ],
   declarations: [
-    User,
+    Komoditas,
     Tables
   ],
   providers: [
+    DataService
   ]
 })
-export class UserModule {
+export class KomoditasModule {
 }

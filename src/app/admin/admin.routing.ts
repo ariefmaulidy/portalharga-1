@@ -11,9 +11,9 @@ export const routes: Routes = [
     component: Admin,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', loadChildren: 'app/admin/dashboard/dashboard.module#DashboardModule' },
       { path: 'user', loadChildren: 'app/admin/user/user.module#UserModule' },
-      { path: 'komoditas', loadChildren: 'app/admin/komoditas/komoditas.module#KomoditasModule' }
+      { path: 'dashboard', loadChildren: 'app/admin/dashboard/dashboard.module#DashboardModule' },
+      { path: 'komoditas', loadChildren: 'app/gov/komoditas/komoditas.module#KomoditasModule' }
       ]
   }
 ];

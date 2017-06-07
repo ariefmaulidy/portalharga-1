@@ -1,54 +1,93 @@
-<div class="widgets">
-
-  <div class="row">
-	   <div class="row" style="margin-bottom: 10px;">
-	    <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
-        <div class="btn-group flex-dropdown" dropdown>
-          <button type="button" class="btn btn-primary">{{dropdown}}</button>
-          <button type="button" class="btn btn-primary" dropdownToggle addToggleClass="true">
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu" dropdownMenu>
-            <li *ngFor="let item of user" class="dropdown-item"><a (click)="setRole(item.id)">{{item.text}}</a></li>
-          </ul>
-        </div>
-	      <div class="btn-group flex-dropdown pull-right" dropdown>
-	      	<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambah Pengguna</button> -->
-	      </div>
-	    </div>
-	  </div>
-      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+<div class="row">
+   <div class="col-md-12" style="margin-bottom: 10px;">
+    <div class="btn-group flex-dropdown" dropdown>
+      <button type="button" class="btn btn-primary">{{dropdown}}</button>
+      <button type="button" class="btn btn-primary" dropdownToggle addToggleClass="true">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" dropdownMenu>
+        <li *ngFor="let item of user" class="dropdown-item"><a (click)="setRole(item.id)">{{item.text}}</a></li>
+      </ul>
+    </div>
+   <div [hidden]="add" class="btn-group flex-dropdown pull-right" dropdown>
+      <button type="button" class="btn btn-primary" (click)="showForm(true)">Tambah Pengguna</button>
+    </div>
+    <div [hidden]="!add" class="btn-group flex-dropdown pull-right" dropdown>
+      <button type="button" class="btn btn-danger" (click)="showForm(false)">Batal</button>
+    </div>
   </div>
-
+  <div class="col-md-12" [hidden]="add">
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+  </div>
 </div>
 
-<div id="tambah" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah Komoditas</h4>
+<ba-card [hidden]="!add">
+  <div class="modal-header">
+    <h4 class="modal-title">Tambah Pengguna</h4>
+  </div>
+  <div class="modal-body">
+  <div class="form-group">
+    <label for="nama">Nama Lengkap</label>
+    <input placeholder="Tuliskan nama lengkap" [(ngModel)]="name" [disabled]="submit" type="text" class="form-control">
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="Username">Username</label>
+        <input placeholder="Tuliskan username pengguna" [(ngModel)]="username" [disabled]="submit" type="text" class="form-control">
       </div>
-      <form>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input placeholder="Tuliskan email pengguna" [(ngModel)]="email" [disabled]="submit" type="email" class="form-control">
+      </div>      
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="form-group">
+        <label for="peran">Peran</label>
+        <select [(ngModel)]="peran" [disabled]="submit" class="form-control" >
+
+          <option value="0" disabled selected="">Pilih peran pengguna</option>
+          <option value="1">Admin</option>
+          <option value="2">Pemerintah</option>
+          <option value="3">Penyuluh</option>
+          <option value="4">Petani</option>
+          <option value="5">Masyarakat</option>
+          <option value="6">pedagang</option>
+        </select>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input [(ngModel)]="password" [disabled]="submit" type="password" class="form-control" id="password">
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" [disabled]="!name || !password || !peran || !email || !username" (click)="onSubmitForm()" type="button" class="btn btn-primary btn-lg"><i class="fa fa-spinner fa-spin" [hidden]="!loading" aria-hidden="true"></i>  Tambah</button>
+  </div>
+</ba-card>
+<div bsModal #childModal="bs-modal" id="delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="childModal.hide()">&times;</button>
+        <h4 class="modal-title">Hapus Pengguna</h4>
+      </div>
       <div class="modal-body">
-		  <div class="form-group">
-		    <label for="name">Nama Komoditas</label>
-		    <input type="text" class="form-control" id="name">
-		  </div>
-		  <div class="form-group">
-		    <label for="satuan">Satuan Komoditas</label>
-		    <input type="text" class="form-control" id="satuan">
-		  </div>
-		  <div class="form-group">
-		    <label for="harga">Harga rata-rata saat ini</label>
-		    <input type="number" min="0" class="form-control" id="harga">
-		  </div>
+      <p>{{hapusText}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="childModal.hide()">Close</button>
+        <button type="button" data-dismiss="modal" (click)="deleteUserFunction();childModal.hide()" class="btn btn-danger">Submit</button>
       </div>
-      </form>
     </div>
   </div>
 </div>

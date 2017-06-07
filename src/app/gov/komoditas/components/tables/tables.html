@@ -1,0 +1,73 @@
+<div class="alert alert-info">
+  Tabel komoditas pertanian yang digunakan dalam sistem. Anda dapat melakukan <b>penambahanan, pengubahan </b>dan <b>penghapusan</b> pada komoditas pertanian.
+</div>
+
+<div class="row" style="margin-bottom: 10px">
+  <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
+    <div [hidden]="add" class="btn-group flex-dropdown pull-right" dropdown>
+    	<button type="button" class="btn btn-primary" (click)="showForm(true)">Tambah Komoditas</button>
+    </div>
+    <div [hidden]="!add" class="btn-group flex-dropdown pull-right" dropdown>
+      <button type="button" class="btn btn-danger" (click)="showForm(false)">Batal</button>
+    </div>
+  </div>
+</div>
+<div class="row" [hidden]="add">
+  <div class="col-md-12">
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"></ng2-smart-table>
+  </div>
+</div>
+
+<ba-card [hidden]="!add">
+  <div class="modal-header">
+    <h4 class="modal-title">Tambah Komoditas</h4>
+  </div>
+  <div class="modal-body">
+  <div class="form-group">
+    <label for="nama">Nama Komoditas</label>
+    <input placeholder="Tuliskan nama komoditas. Misal: Cabai" [(ngModel)]="nama" [disabled]="submit" type="text" class="form-control">
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="form-group">
+        <label for="satuan">Satuan Komoditas</label>
+        <select [(ngModel)]="satuan" [disabled]="submit" class="form-control" >
+          <option value="" disabled selected>Pilih satuan komoditas (Kg, Kwintal atau Liter)</option>
+          <option value="Kg">Kg</option>
+          <option value="Kwintal">Kwintal</option>
+          <option value="Liter">Liter</option>
+        </select>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="form-group">
+        <label for="harga">Harga rata-rata saat ini</label>
+        <input placeholder="Dalam satuan rupiah dan ketik nominal angkanya saja. Misal: 10500" [(ngModel)]="harga" [disabled]="submit" type="number" min="0" class="form-control" id="harga">
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" [disabled]="!nama || !harga || !satuan" (click)="onSubmitForm()" type="button" class="btn btn-primary btn-lg"><i class="fa fa-spinner fa-spin" [hidden]="!loading" aria-hidden="true"></i>  Tambah</button>
+  </div>
+</ba-card>
+
+<div bsModal #childModal="bs-modal" id="delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="childModal.hide()">&times;</button>
+        <h4 class="modal-title">Hapus Komoditas</h4>
+      </div>
+      <div class="modal-body">
+		  <p>{{hapusText}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="childModal.hide()">Close</button>
+        <button type="button" data-dismiss="modal" (click)="deleteKomoditasFunction();childModal.hide()" class="btn btn-danger">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
