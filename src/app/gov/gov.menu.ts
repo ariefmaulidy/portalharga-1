@@ -74,6 +74,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'materi',
+        data: {
+          menu: {
+            title: 'Materi Penyuluh',
+            icon: 'ion-ios-paper',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      }
     ]
   }
 ];

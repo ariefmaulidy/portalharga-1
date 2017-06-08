@@ -18,7 +18,7 @@ export class DataService {
   public urlGetUser       = this.baseUrl + '/user/get';
   public urlGetUserRole   = this.baseUrl + '/user/get/role/';
   public urlAddUser       = this.baseUrl + '/user/add';
-  public urlUpdateUser    = this.baseUrl + '/user/update';
+  public urlUpdateUser    = this.baseUrl + '/user/update/admin';
   public urlDeleteUser    = this.baseUrl + '/user/delete';
   //--laporanHarga
   public urlGetLaporanHarga       = this.baseUrl + '/laporanHarga/get';
@@ -36,6 +36,13 @@ export class DataService {
   public urlAddAspirasi       = this.baseUrl + '/aspirasi/add';
   public urlUpdateAspirasi    = this.baseUrl + '/aspirasi/update';
   public urlDeleteAspirasi    = this.baseUrl + '/aspirasi/delete';
+
+  //--materi
+  public urlGetMateri       = this.baseUrl + '/materi/get/';
+  public urlAddMateri       = this.baseUrl + '/materi/add';
+  public urlUpdateMateri    = this.baseUrl + '/materi/update';
+  public urlDeleteMateri    = this.baseUrl + '/materi/delete';
+
   //--operasiPasar
   public urlGetOperasiPasar      = this.baseUrl + '/operasiPasar/get/';
   public urlAddOperasiPasar      = this.baseUrl + '/operasiPasar/add';

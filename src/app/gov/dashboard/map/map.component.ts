@@ -105,7 +105,7 @@ export class Maps {
           var marker = new this.google.maps.Marker({
             position: {lat: dataHargaLoop[i].latitude, lng: dataHargaLoop[i].longitude},
             map: this.map,
-            icon: 'http://localhost:3000/assets/icon/marker/'+dataHargaLoop[i].namaKomoditas.toLowerCase()+'.png',
+            icon: 'https://ph.yippytech.com/assets/icon/marker/'+dataHargaLoop[i].namaKomoditas.toLowerCase()+'.png',
             infowindow: infoWindow
           });
 

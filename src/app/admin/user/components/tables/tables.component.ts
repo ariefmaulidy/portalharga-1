@@ -48,6 +48,7 @@ export class Tables {
       editButtonContent: '<i class="ion-edit"></i>',
       saveButtonContent: '<i class="ion-checkmark"></i>',
       cancelButtonContent: '<i class="ion-close"></i>',
+      confirmSave: true
     },
     delete: {
       deleteButtonContent: '<i class="ion-trash-a"></i>',
@@ -133,13 +134,15 @@ export class Tables {
   }
 
   private updateUserFunction(data) {
-    let creds = JSON.stringify({ komoditas_id: data.komoditas_id, name: data.name, satuan: data.satuan, harga: data.harga });
-    this.authHttp.post(this.data.urlUpdateKomoditas, creds)
+    let creds = JSON.stringify({ user_id: data.user_id, name: data.name, email: data.email, address: data.address});
+    this.authHttp.post(this.data.urlUpdateUser, creds)
       .map(res => res.json())
       .subscribe(data => {
+        console.log(data); 
         localStorage.setItem('id_token', data.token);
         this.data.showMessage(data.message);
-      })
+      })      
+    return 1;
   }
 
   private addUserFunction() {
@@ -151,9 +154,8 @@ export class Tables {
         this.getUserAllFunction();
         this.loading = false;
         this.submit = false;
-        this.add = false
+        this.add = false;
       })
-    console.log(creds);
   }
 
   onSubmitForm(){
@@ -197,6 +199,15 @@ export class Tables {
     console.log(this.deleteId);
     // jQuery("#delete").modal("show");
     this.childModal.show();
+  }
+
+  onSaveConfirm(event): void {
+    console.log(event.newData);
+    if(this.updateUserFunction(event.newData)){
+      event.confirm.resolve();
+    }else{
+      event.confirm.reject();
+    }
   }
 }
 
