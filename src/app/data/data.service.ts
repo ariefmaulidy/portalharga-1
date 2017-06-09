@@ -9,6 +9,8 @@ export class DataService {
   public user: Array<{id: number, text: string}> = [{id: 1, text: 'Admin'}, {id: 2, text: 'Pemerintah'}, {id: 3, text: 'Penyuluh'}, {id: 4, text: 'Petani '}, {id: 5, text: 'Masyarakat'}, {id: 6, text: 'Pedagang '}];
   // URL
   public baseUrl = 'https://ph.yippytech.com:5000'
+  // --dashboard
+  public urlGetDashboard    = this.baseUrl + '/dashboard/get';
   //-- komoditas
   public urlGetKomoditas    = this.baseUrl + '/komoditas/get';
   public urlAddKomoditas    = this.baseUrl + '/komoditas/add';
@@ -59,11 +61,11 @@ export class DataService {
   }
 
   public showMessage(message) {
-    this.toastr.success(message,'Message!');
+    this.toastr.success(message,'Berhasil!');
   }
 
   public showMessageSuccess(message) {
-    this.toastr.success(message,'Success!');
+    this.toastr.success(message,'Berhasil!');
   }
 
   public showMessageError(message) {

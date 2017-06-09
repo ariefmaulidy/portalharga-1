@@ -13,22 +13,22 @@ export class PieChartService {
       {
         color: pieColor,
         description: 'Masyarakat',
-        stats: '57,820',
+        stats: '15',
         icon: 'person',
       }, {
         color: pieColor,
         description: 'Penyuluh',
-        stats: '89,745',
+        stats: '5',
         icon: 'person',
       }, {
         color: pieColor,
         description: 'Petani',
-        stats: '178,391',
+        stats: '33',
         icon: 'person',
       }, {
         color: pieColor,
         description: 'Pedagang',
-        stats: '32,592',
+        stats: '5',
         icon: 'person',
       }
     ];

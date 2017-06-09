@@ -12,7 +12,7 @@ export class TrafficChartService {
     let dashboardColors = this._baConfig.get().colors.dashboard;
     return [
       {
-        value: 2000,
+        value: 100,
         color: dashboardColors.white,
         highlight: colorHelper.shade(dashboardColors.white, 15),
         label: 'Other',

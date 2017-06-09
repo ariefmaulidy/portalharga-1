@@ -1,16 +1,7 @@
 <div class="row">
    <div class="col-md-12" style="margin-bottom: 10px;">
-    <div class="btn-group flex-dropdown" dropdown>
-      <button type="button" class="btn btn-primary">{{dropdown}}</button>
-      <button type="button" class="btn btn-primary" dropdownToggle addToggleClass="true">
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" dropdownMenu>
-        <li *ngFor="let item of user" class="dropdown-item"><a (click)="setRole(item.id)">{{item.text}}</a></li>
-      </ul>
-    </div>
    <div [hidden]="add" class="btn-group flex-dropdown pull-right" dropdown>
-      <button type="button" class="btn btn-primary" (click)="showForm(true)">Tambah Pengguna</button>
+      <button type="button" class="btn btn-primary" (click)="showForm(true)">Tambah Penyuluh</button>
     </div>
     <div [hidden]="!add" class="btn-group flex-dropdown pull-right" dropdown>
       <button type="button" class="btn btn-danger" (click)="showForm(false)">Batal</button>
@@ -23,7 +14,7 @@
 
 <ba-card [hidden]="!add">
   <div class="modal-header">
-    <h4 class="modal-title">Tambah Pengguna</h4>
+    <h4 class="modal-title">Tambah Penyuluh</h4>
   </div>
   <div class="modal-body">
   <div class="form-group">
@@ -42,7 +33,6 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input placeholder="Tuliskan email pengguna" [(ngModel)]="email" [disabled]="submit" type="email" class="form-control">
-        <p style="color: red">{{emailMessage}}</p>
       </div>      
     </div>
   </div>
@@ -52,14 +42,7 @@
       <div class="form-group">
         <label for="peran">Peran</label>
         <select [(ngModel)]="peran" [disabled]="submit" class="form-control" >
-
-          <option value="0" disabled selected="">Pilih peran pengguna</option>
-          <option value="1">Admin</option>
-          <option value="2">Pemerintah</option>
           <option value="3">Penyuluh</option>
-          <option value="4">Petani</option>
-          <option value="5">Masyarakat</option>
-          <option value="6">pedagang</option>
         </select>
       </div>
     </div>

@@ -15,6 +15,7 @@ export const routes: Routes = [
       { path: 'materi', loadChildren: 'app/gov/materi/materi.module#MateriModule' },
       { path: 'operasi-pasar', loadChildren: 'app/gov/operasiPasar/operasiPasar.module#OperasiPasarModule' },
       { path: 'info-panen', loadChildren: 'app/gov/infoPanen/infoPanen.module#InfoPanenModule' },
+      { path: 'penyuluh', loadChildren: 'app/gov/user/user.module#UserModule' },
       { path: 'info-harga', loadChildren: 'app/gov/infoHarga/infoHarga.module#InfoHargaModule' },
       { path: 'komoditas', loadChildren: 'app/gov/komoditas/komoditas.module#KomoditasModule' }
     ]

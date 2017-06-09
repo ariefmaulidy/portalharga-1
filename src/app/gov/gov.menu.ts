@@ -75,6 +75,18 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'penyuluh',
+        data: {
+          menu: {
+            title: 'Penyuluh',
+            icon: 'ion-person',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
         path: 'materi',
         data: {
           menu: {

@@ -22,7 +22,7 @@ export class Tables {
   public dropdown;
   public user;
   public satu;
-  public role:number = 1;
+  public role:number = 3;
   query: string = '';
   
   public add = false;
@@ -34,11 +34,10 @@ export class Tables {
   public username;
   public email;
   public password;
-  public peran = 0; 
+  public peran = 3; 
 
   public deleteId;
 
-  public emailMessage = '';
   settings = {
     add: {
       addButtonContent: '',
@@ -118,7 +117,6 @@ export class Tables {
     this.name = '';
     this.username = '';
     this.password = '';
-    this.peran = 0;
     this.email = '';
     this.add = x;
   }
@@ -156,29 +154,13 @@ export class Tables {
         this.loading = false;
         this.submit = false;
         this.add = false;
-      }, err =>{
-          this.data.showMessageError(err.message);
-          this.loading = false;
-          this.submit = false;
       })
-  }
-
-  private validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
   }
 
   onSubmitForm(){
     this.loading = true;
     this.submit = true;
-    if (this.validateEmail(this.email)) {
-      this.emailMessage = '';
-      this.addUserFunction();
-    }else{
-      this.loading = false;
-      this.submit = false;
-      this.emailMessage = 'Email tidak valid';
-    }
+    this.addUserFunction();
   }
 
   private deleteUserFunction() {

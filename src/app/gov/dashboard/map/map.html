@@ -2,13 +2,14 @@
     <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12">
       <div class="btn-group" role="group" aria-label="Basic example" style="margin-right: 10px;">
         <button [class.btn-primary]="type == 'infoHarga'" (click)="setType('infoHarga')" type="button" class="btn ">Info Harga</button>
-        <button [class.btn-primary]="type == 'infoPanen'" (click)="setType('infoPanen')" type="button" class="btn">Info Produksi</button>
+        <button [class.btn-primary]="type == 'infoPanen'" (click)="setType('infoPanen')" type="button" class="btn">Info Panen</button>
       </div>
 
       <div [hidden]="type == 'infoPanen'" class="btn-group" role="group" aria-label="Basic example">
-        <button [class.btn-primary]="day == '0'" type="button" (click)="setDay('0')" class="btn btn-primary">Hari ini</button>
+        <button [class.btn-primary]="day == '0'" type="button" (click)="setDay('0')" class="btn">Hari ini</button>
         <button [class.btn-primary]="day == '7'" type="button" (click)="setDay('7')" class="btn">Minggu ini</button>
         <button [class.btn-primary]="day == '30'" type="button" (click)="setDay('30')" class="btn">Bulan ini</button>
+        <button [class.btn-primary]="day == '99'" type="button" (click)="setDay('99')" class="btn">Seluruhnya</button>
       </div>
 
       <div class="btn-group flex-dropdown pull-right" dropdown>
@@ -17,8 +18,8 @@
           <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu" dropdownMenu>
-          <li class="dropdown-item"><a (click)="setRole('Komoditas')">Seluruh Komoditas</a></li>
-          <li *ngFor="let item of komoditas" class="dropdown-item"><a (click)="setRole(item.komoditas_id)">{{item.name}}</a></li>
+          <li class="dropdown-item"><a (click)="setKomoditas('Komoditas')">Seluruh Komoditas</a></li>
+          <li *ngFor="let item of komoditas" class="dropdown-item"><a (click)="setKomoditas(item.komoditas_id)">{{item.name}}</a></li>
         </ul>
       </div>
     </div>
@@ -27,8 +28,45 @@
     <div class="col-md-9">
       <div class="google-maps"></div>      
     </div>
-    <ba-card class="col-xlg-3 col-xl-3 col-lg-12 col-sm-12 col-xs-12" title="Feed"
+    <ba-card class="col-xlg-3 col-xl-3 col-lg-12 col-sm-12 col-xs-12" title="{{titleFeed}}"
              baCardClass="medium-card with-scroll feed-panel">
-      <feed></feed>
+      <div class="feed-messages-container" *ngIf="type == 'infoHarga'">
+        <div class="feed-message" *ngFor="let message of dataMarkerFilter" (click)="expandMessage(message)">
+          <div class="text-block text-message">
+            <div class="message-header">
+              <span class="author">{{ message.nama }}</span>
+            </div>
+            <p style="color: #7fc623">{{ message.namaKomoditas }} Rp. {{ message.harga}} /{{message.satuan}}</p>
+            <div class="message-content line-clamp" [ngClass]="{'line-clamp-2' : !message.expanded}">
+              <span *ngIf="message.preview">{{ message.header }} </span><i class="fa fa-map-marker" aria-hidden="true"></i> {{ message.alamat }}
+            </div>
+            <div [ngClass]="{'hidden': !message.expanded}" class="message-time">
+              <div class="post-time">
+                <p>{{ message.datePost }}</p>
+                {{ message.datePost }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feed-messages-container" *ngIf="type == 'infoPanen'">
+        <div class="feed-message" *ngFor="let message of dataMarkerFilter" (click)="expandMessage(message)">
+          <div class="text-block text-message">
+            <div class="message-header">
+              <span class="author">{{ message.name }}</span>
+            </div>
+            <p style="color: #7fc623">{{ message.nama_komoditas }} {{ message.jumlah}} {{message.satuan_komoditas}}</p>
+            <div class="message-content line-clamp" [ngClass]="{'line-clamp-2' : !message.expanded}">
+              <span *ngIf="message.preview">{{ message.header }} </span><i class="fa fa-map-marker" aria-hidden="true"></i> {{ message.alamat }}
+            </div>
+            <div [ngClass]="{'hidden': !message.expanded}" class="message-time">
+              <p><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Tanam {{message.date_tanam}}<br><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Panen {{message.date_panen}} </p>
+              <div class="post-time">
+                {{ message.datePost }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </ba-card>
   </div>

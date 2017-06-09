@@ -84,16 +84,15 @@
     cursor: pointer;
     position: relative;
     border-radius: 5px;
-    margin: 0 0 0 80px;
     padding: 5px 20px;
     color: $text-message-color;
-    width: 280px;
+    width: 320px;
     height: 70px;
 
     &.text-message {
       font-size: 12px;
       width: inherit;
-      max-width: calc(100% - 80px);
+      max-width: calc(100%);
       height: inherit;
       min-height: 60px;
       &:before {
