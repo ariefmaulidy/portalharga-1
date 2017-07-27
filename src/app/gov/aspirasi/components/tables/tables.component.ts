@@ -7,6 +7,8 @@ import { AuthHttp } from 'angular2-jwt';
 import 'style-loader!./tables.scss';
 
 import { DataService } from '../../../../data/data.service';
+import { CustomEditorComponent } from '../../../../shared/custom-editor.component';
+import { CustomRenderComponent } from '../../../../shared/custom-render.component';
 
 @Component({
   selector: 'tables',
@@ -26,6 +28,7 @@ export class Tables {
   public harga;
   public nama;
   public satuan;
+
   settings = {
     add: {
       addButtonContent: '',
@@ -64,7 +67,15 @@ export class Tables {
         type: 'string',
         editable: false,
         sortDirection: 'desc'
-      }
+      },
+      link: {
+        title: '',
+        type: 'html',
+        editor: {
+          type: 'custom',
+          component: CustomEditorComponent,
+        },
+      },
     },
     actions: {
       add: false,
@@ -82,11 +93,14 @@ export class Tables {
     this.authHttp.get(this.data.urlGetAspirasi)
       .map(res => res.json())
       .subscribe(data => {
+        for (var i = data.data.length - 1; i >= 0; i--) {
+          data.data[i].link = "<a href='#/gov/tanggapan/aspirasi/" + data.data[i].aspirasi_id + "'>Tanggapi</a>";
+        }
         localStorage.setItem('id_token', data.token);
         localStorage.setItem('aspirasi', JSON.stringify(data.data));
         this.source.load(data.data);
         console.log(data.data);
-        this.data.showMessage(data.message);
+        // this.data.showMessage(data.message);
       })
   }
 

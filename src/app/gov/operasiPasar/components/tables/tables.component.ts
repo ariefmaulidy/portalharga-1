@@ -8,6 +8,9 @@ import 'style-loader!./tables.scss';
 
 import { DataService } from '../../../../data/data.service';
 
+import { CustomEditorComponent } from '../../../../shared/custom-editor.component';
+import { CustomRenderComponent } from '../../../../shared/custom-render.component';
+
 @Component({
   selector: 'tables',
   providers: [DataService],
@@ -68,7 +71,15 @@ export class Tables {
         type: 'string',
         editable: false,
         sortDirection: 'desc'
-      }
+      },
+      link: {
+        title: '',
+        type: 'html',
+        editor: {
+          type: 'custom',
+          component: CustomEditorComponent,
+        },
+      },
     },
     actions: {
       add: false,
@@ -86,6 +97,9 @@ export class Tables {
     this.authHttp.get(this.data.urlGetOperasiPasar)
       .map(res => res.json())
       .subscribe(data => {
+        for (var i = data.data.length - 1; i >= 0; i--) {
+          data.data[i].link = "<a href='#/gov/tanggapan/operasipasar/" + data.data[i].operasiPasar_id + "'>Tanggapi</a>";
+        }
         localStorage.setItem('id_token', data.token);
         localStorage.setItem('operasiPasar', JSON.stringify(data.data));
         this.source.load(data.data);

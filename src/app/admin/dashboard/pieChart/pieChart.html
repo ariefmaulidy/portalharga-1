@@ -3,12 +3,12 @@
   <ba-card *ngFor="let item of dataku" class="pie-chart-item-container col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
 
     <div class="pie-chart-item">
-      <div class="chart" [attr.data-rel]="color" data-percent="{{item.persentase}}<">
+      <div class="chart" [attr.data-rel]="item.color" data-percent="60">
         <span class="percent"></span>
       </div>
       <div class="description">
         <div>{{item.id}}</div>
-        <div class="description-stats">{{item.jumlah}}<</div>
+        <div class="description-stats"><small>{{item.jumlah}} user</small></div>
       </div>
       <i class="chart-icon i-person"></i>
     </div>

@@ -10,6 +10,8 @@ import { routing }       from './aspirasi.routing';
 import { Aspirasi } from './aspirasi.component';
 
 import { Tables } from './components/tables/tables.component';
+import { CustomEditorComponent } from '../../shared/custom-editor.component';
+import { CustomRenderComponent } from '../../shared/custom-render.component';
 
 @NgModule({
   imports: [
@@ -20,9 +22,12 @@ import { Tables } from './components/tables/tables.component';
     DropdownModule.forRoot(),
     Ng2SmartTableModule
   ],
+  entryComponents: [CustomEditorComponent, CustomRenderComponent],
   declarations: [
     Aspirasi,
-    Tables
+    Tables,
+    CustomEditorComponent,
+    CustomRenderComponent
   ],
   providers: [
   ]

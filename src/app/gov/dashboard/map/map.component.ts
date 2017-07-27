@@ -153,7 +153,8 @@ export class Maps {
               '<p>' + this.dataMarkerFilter[i].jumlah + ' ' +this.dataMarkerFilter[i].satuan_komoditas + '</p>' +
               '<p><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Tanam ' + this.dataMarkerFilter[i].date_tanam +'<br><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Panen '+ this.dataMarkerFilter[i].date_panen +'</p>'+
               '<p><small>' + this.dataMarkerFilter[i].name + '</small></p><i class="fa fa-map-marker" aria-hidden="true"></i> ' + 
-              this.dataMarkerFilter[i].alamat + '<br><br>' + 
+              this.dataMarkerFilter[i].alamat + '<br>' + 
+              this.dataMarkerFilter[i].keterangan + '<br><br>' + 
               '<small style="color:#7fc623">' + this.dataMarkerFilter[i].datePost; 
           }
 

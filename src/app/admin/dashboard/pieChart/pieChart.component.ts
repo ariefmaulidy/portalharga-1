@@ -63,25 +63,25 @@ export class PieChart {
               {
               'id':'pedagang',
               'jumlah':data.data.pedagang,
-              'persentase':data.data.pedagang/userCount*100;
+              'persentase':data.data.pedagang/userCount*100
               },
               {
               'id':'penyuluh',
               'jumlah':data.data.penyuluh,
-              'persentase':data.data.penyuluh/userCount*100;
+              'persentase':data.data.penyuluh/userCount*100
               },
               {
               'id':'petani',
               'jumlah':data.data.petani,
-              'persentase':data.data.petani/userCount*100;
+              'persentase':data.data.petani/userCount*100
               },
               {
               'id':'masyarakat',
               'jumlah':data.data.masyarakat,
-              'persentase':data.data.masyarakat/userCount*100;
+              'persentase':data.data.masyarakat/userCount*100
               },
             ];
-        localStorage.setItem('dashboard', temp);
+        localStorage.setItem('dashboard', JSON.stringify(temp));
         this.dataku = temp;
       });
   }

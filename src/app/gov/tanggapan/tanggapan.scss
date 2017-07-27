@@ -1,0 +1,46 @@
+@media screen and (min-width: 1620px) {
+  .row.shift-up {
+    > * {
+      margin-top: -573px;
+    }
+  }
+}
+
+@media screen and (max-width: 1620px) {
+  .card.feed-panel.large-card {
+    height: 824px;
+  }
+}
+
+.user-stats-card {
+  .card-title {
+    padding: 0 0 15px;
+  }
+}
+
+.blurCalendar {
+  height: 475px;
+}
+
+.edium-card{
+  height: calc(100vh - 283px);
+}
+.label{
+  background-color: gray;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 10px;
+}
+.border{
+  border-color: gray;
+}
+.card{
+  padding: 20px;
+}
+.card.green{
+  background-color: #aee06d;
+}
+.btn{
+  margin: 10px 0;
+}

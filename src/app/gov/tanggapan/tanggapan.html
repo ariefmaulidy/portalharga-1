@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="card green">
+    	<p class="modal-title">{{konten}}</p>
+    	<span class="label label-default">{{subjek}}</span>
+	  	<div class="row">
+	  		<div class="col-md-3 pull-right">
+	  			<p>	
+	  				<b>{{pengguna}}</b><br>
+	  				<small>Total Pendukung : {{pendukung}}</small><br>
+	  				<small style="color: gray">{{tanggal}}</small>
+	  			</p>
+	  		</div>
+	  	</div>
+    </div>
+    <hr>
+    <p><b>Tanggapan</b></p>
+     <div class="card" *ngFor="let item of tanggapan">
+    	<p class="modal-title">{{item.isi}}</p>
+	  	<div class="row">
+	  		<div class="col-md-12">
+	  			<p>	
+	  				<small style="color: gray">{{item.datePost}}</small><br>
+	  				<button (click)="hapusTanggapan(item._id)" type="button" class="pull-right btn btn-primary"> Hapus</button>
+	  			</p>
+	  		</div>
+	  	</div>
+    </div>
+    <div class="form-group">
+	    <label for="nama">Berikan Tanggapan</label>
+	    <textarea placeholder="Tuliskan tanggapan" [(ngModel)]="tatanggapan" [disabled]="submit" type="text" class="form-control"></textarea>
+
+	    <button data-dismiss="modal" [disabled]="!tatanggapan" (click)="onSubmitForm()" type="button" class="pull-right btn btn-primary btn-lg"><i class="fa fa-spinner fa-spin" [hidden]="!loading" aria-hidden="true"></i> Tanggapi</button>
+
+	    <a href="#/gov/{{type}}" type="button" class="pull-left btn btn-primary btn-lg">Kembali</a>
+	  </div>
+  </div>
+  
+</div>

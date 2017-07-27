@@ -24,7 +24,7 @@ export class BaPageTop {
     if (this.decode.user_data.picture) {
       this.photo = this.decode.user_data.picture;
     }else{
-      this.photo = 'http://localhost:3000/assets/img/app/profile/default.png';
+      this.photo = 'https://ph.yippytech.com/assets/img/app/profile/default.png';
     }
   }
 
