@@ -20,8 +20,8 @@ import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { GovModule } from './gov/gov.module';
 
-import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { ToastrModule } from 'toastr-ng2';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { provideAuth } from 'angular2-jwt';
 
 import { DataService } from './data/data.service';
@@ -63,7 +63,7 @@ export type StoreType = {
     ENV_PROVIDERS,
     APP_PROVIDERS,
     AUTH_PROVIDERS,
-    provideAuth({
+    provideAuth({ // untuk setting auth http 
       headerName: "Authorization",
       headerPrefix: "Bearer",
       globalHeaders: [{'Content-Type':'application/json'}],

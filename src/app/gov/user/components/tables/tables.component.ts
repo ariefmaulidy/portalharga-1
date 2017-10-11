@@ -55,28 +55,6 @@ export class Tables {
       confirmDelete: true
     },
     columns: {
-      // role: {
-      //   title: 'Role',
-      //   type: 'string',
-      //   editor: {
-      //     type: 'list',
-      //     config: {
-      //       list: [
-      //         { value: '1', title: 'Admin' }, 
-      //         { value: '2', title: 'Pemerintah' }, 
-      //         { value: '3', title: 'Penyuluh' }, 
-      //         { value: '4', title: 'Petani' }, 
-      //         { value: '5', title: 'Masyarakat' },
-      //         { value: '6', title: 'Pedagang' }
-      //       ]
-      //     }
-      //   }
-      // },
-      // user_id: {
-      //   title: 'user_id',
-      //   type: 'string',
-      //   editable: false
-      // },
       username: {
         title: 'Username',
         type: 'string',
@@ -96,7 +74,8 @@ export class Tables {
         editor: {
           type: 'textarea'
         }
-      },
+      }
+      ,
       last_login: {
         title: 'Last Login',
         type: 'string',

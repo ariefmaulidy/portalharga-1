@@ -1,11 +1,11 @@
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, Input, ViewChild, ElementRef } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { AuthHttp } from 'angular2-jwt';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { CustomEditorComponent } from './custom-editor.component';
 import 'style-loader!./tables.scss';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { DataService } from '../../../../data/data.service';
 
@@ -18,6 +18,8 @@ import { DataService } from '../../../../data/data.service';
 
 export class Tables {
   @ViewChild('childModal') public childModal:ModalDirective;
+  @Input() multiple: boolean = false;
+  @ViewChild('fileInput') inputEl: ElementRef;
 
   public query: string = '';
   public jQuery:any;
@@ -34,6 +36,8 @@ export class Tables {
 
   public judul;
   public keterangan;
+
+  public filesToUpload: Array<File>;
   settings = {
     add: {
       addButtonContent: '',
@@ -61,15 +65,20 @@ export class Tables {
       },
       keterangan: {
         title: 'Keterangan',
-        type: 'string'
+        type: 'string',
+        editor: {
+          type: 'textarea'
+        }
       },
       datePost: {
         title: 'Waktu',
-        type: 'string'
+        type: 'string',
+        editable: false
       },
       link: {
         title: 'File',
-        type: 'html'
+        type: 'html',
+        editable: false
       }
     },
     pager: {
@@ -91,7 +100,7 @@ export class Tables {
       .map(res => res.json())
       .subscribe(data => {
         for (var i = data.data.length - 1; i >= 0; i--) {
-          data.data[i].link = "<a target='_blank' href='" + data.data[i].file + "'> Unduh </a>";
+          data.data[i].link = "<a target='_blank' href='" + data.data[i].file + "'> Unduh </a><a target='_blank' href='" + data.data[i].file + "'> Update</a>";
         }
         localStorage.setItem('id_token', data.token);
         localStorage.setItem('materi', JSON.stringify(data.data));
@@ -102,10 +111,12 @@ export class Tables {
   }
 
   private updateMateriFunction(data) {
-    let creds = JSON.stringify({ komoditas_id: data.komoditas_id, name: data.name, satuan: data.satuan, harga: data.harga });
+    console.log(data)
+    let creds = JSON.stringify({ materi_id: data.materi_id, judul: data.judul, keterangan: data.keterangan});
     this.authHttp.post(this.data.urlUpdateMateri, creds)
       .map(res => res.json())
       .subscribe(data => {
+        console.log(data);
         localStorage.setItem('id_token', data.token);
         this.data.showMessage(data.message);
       })
@@ -113,33 +124,44 @@ export class Tables {
     return 1;
   }
 
-  private addMateriFunction() {
-    let creds = 'judul=' + this.judul + '&keterangan=' + this.keterangan;
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
-
-    // let creds = JSON.stringify({judul: this.judul, keterangan: this.keterangan});
-    // this.authHttp.post(this.data.urlAddMateri, creds, { headers: headers })
-    //   .map(res => res.json())
-    //   .subscribe(data => {
-    //     localStorage.setItem('id_token', data.token);
-    //     this.data.showMessage(data.message);
-    //     this.getMateriFunction();
-    //     this.loading = false;
-    //   })
-
-    // this.clearForm();
-    this.http.post(this.data.urlAddMateri, creds, {headers:headers})
-      .map(res => res.json())
-      .subscribe(data => {
-          localStorage.setItem('id_token', data.token);
-          this.data.showMessage(data.message);
-          this.getMateriFunction();
-          this.loading = false;
-          this.add = false;
-        }
-      )
+  upload() {
+    this.loading = true;
+    this.submit = true;
+    this.makeFileRequest(this.data.urlAddMateri, [], this.filesToUpload).then((result) => {
+        console.log(result);
+    }, (error) => {
+        console.error(error);
+    });
+  }
+ 
+  fileChangeEvent(fileInput: any){
+      this.filesToUpload = <Array<File>> fileInput.target.files;
+      console.log(this.filesToUpload);
+  }
+ 
+  makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
+      return new Promise((resolve, reject) => {
+          var formData: any = new FormData();
+          var xhr = new XMLHttpRequest();
+          for(var i = 0; i < files.length; i++) {
+              formData.append("file", files[i], files[i].name);
+          }
+          formData.append('judul',this.judul);
+          formData.append('keterangan',this.keterangan);
+          formData.append('token','Bearer ' + localStorage.getItem('id_token'));
+          xhr.onreadystatechange = function () {
+              if (xhr.readyState == 4) {
+                  if (xhr.status == 200) {
+                      resolve(JSON.parse(xhr.response));
+                  } else {
+                      reject(xhr.response);
+                  }
+              }
+          }
+          xhr.open("POST", url, true);
+          xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('id_token')); 
+          xhr.send(formData);
+      });
   }
 
   private deleteMateriFunction() {
@@ -155,7 +177,9 @@ export class Tables {
     this.clearForm();
   }
 
-  public clearForm(){  
+  public clearForm(){
+    this.judul = '';
+    this.keterangan = '';
     this.loading = false;
     this.submit = false;
     this.add = false;
@@ -163,6 +187,7 @@ export class Tables {
 
   constructor( private http: Http, public authHttp: AuthHttp, public data: DataService) {
     //get data in localStorage('komoditas')
+    this.filesToUpload = [];
     if (localStorage.getItem('materi')) {
       this.source.load(JSON.parse(localStorage.getItem('materi')));
     }
@@ -176,12 +201,6 @@ export class Tables {
     }else{
       event.confirm.reject();
     }
-  }
-  
-  onSubmitForm(){
-    this.loading = true;
-    this.submit = true;
-    this.addMateriFunction();
   }
 
   onDeleteConfirm(event): void {

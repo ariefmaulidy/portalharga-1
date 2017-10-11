@@ -38,13 +38,13 @@
     <div class="col col-md-6">
       <div class="form-group">
         <label for="harga">Unggah Fail</label>
-        <input [(ngModel)]="file" [disabled]="submit" type="file" accept="application/pdf,application/msword, application/vnd.ms-powerpoint" class="form-control">
+        <input type="file" name="upload" (change)="fileChangeEvent($event)" class="form-control">
       </div>
     </div>
   </div>
   </div>
   <div class="modal-footer">
-    <button data-dismiss="modal" [disabled]="!judul || !keterangan" (click)="onSubmitForm()" type="button" class="btn btn-primary btn-lg"><i class="fa fa-spinner fa-spin" [hidden]="!loading" aria-hidden="true"></i> Tambah</button>
+    <button data-dismiss="modal" [disabled]="!judul || !keterangan" (click)="upload()" type="button" class="btn btn-primary btn-lg"><i class="fa fa-spinner fa-spin" [hidden]="!loading" aria-hidden="true"></i> Tambah</button>
   </div>
 </ba-card>
 

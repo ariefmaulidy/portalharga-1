@@ -7,8 +7,12 @@ import { Router } from '@angular/router';
 @Injectable()
 export class DataService {
   public user: Array<{id: number, text: string}> = [{id: 1, text: 'Admin'}, {id: 2, text: 'Pemerintah'}, {id: 3, text: 'Penyuluh'}, {id: 4, text: 'Petani '}, {id: 5, text: 'Masyarakat'}, {id: 6, text: 'Pedagang '}];
-  // URL
-  public baseUrl = 'https://ph.yippytech.com:5000'
+  // base URL
+  public baseUrl = 'https://ph.yippytech.com:5000';
+
+  // --login
+  public urlLogin   = this.baseUrl + '/user/auth'
+
   // --dashboard
   public urlGetDashboard    = this.baseUrl + '/dashboard/get';
   
@@ -64,10 +68,12 @@ export class DataService {
   
   constructor(private router: Router,  private toastr: ToastrService){
     //logout if token expired
-    if (!tokenNotExpired()) {
-      localStorage.clear();
-      this.router.navigate(['/']);
-      this.showMessageError('Session Expired');
+    if (localStorage.getItem('id_token')) {
+      if (!tokenNotExpired()) {
+        localStorage.clear();
+        this.router.navigate(['/']);
+        this.showMessageError('Session Expired');
+      }
     }
   }
 

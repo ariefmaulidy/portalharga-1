@@ -51,12 +51,12 @@ export class Login {
             localStorage.setItem('id_token', data.token);
             this.checkRole();
           }else{
-            this.showMessageError('Sign in Failed')
+            this.showMessageError('Sign in Failed');
           }
           this.progress = false;
         },
         err =>{
-          this.showMessageError(err.message);
+          this.showMessageError('Gagal untuk masuk, silahkan coba kembali')
           this.progress = false;
         }
       )

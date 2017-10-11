@@ -78,7 +78,6 @@ export class Maps {
       this.titleFeed = 'INFO Panen';
     }
     this.getMarkerDataFunction();
-    this.dataMarker = [];
   }
 
   expandMessage (message){
@@ -92,7 +91,6 @@ export class Maps {
       this.url = this.data.urlGetLaporanHarga;
     }
     this.getMarkerDataFunction();
-    this.dataMarker = [];
   }
 
   private setKomoditas(id){

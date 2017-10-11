@@ -6,11 +6,8 @@ import { NgaModule } from '../../theme/nga.module';
 import { Dashboard } from './dashboard.component';
 import { routing }       from './dashboard.routing';
 
-import { PieChart } from './pieChart';
-import { Feed } from './feed';
-import { FeedService } from './feed/feed.service';
-import { PieChartService } from './pieChart/pieChart.service';
 import { Maps } from './map/map.component';
+import { Feed } from './feed/feed.component';
 import { DropdownModule} from 'ng2-bootstrap';
 
 @NgModule({
@@ -22,14 +19,10 @@ import { DropdownModule} from 'ng2-bootstrap';
     routing
   ],
   declarations: [
-    PieChart,
-    Feed,
     Maps,
     Dashboard
   ],
   providers: [
-    FeedService,
-    PieChartService
   ]
 })
 export class DashboardModule {}

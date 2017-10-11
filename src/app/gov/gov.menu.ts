@@ -27,18 +27,6 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'tanggapan',
-        data: {
-          menu: {
-            title: 'Tanggapan',
-            icon: 'ion-social-usd',
-            selected: false,
-            expanded: false,
-            order: 0,
-          }
-        }
-      },
-      {
         path: 'info-panen',
         data: {
           menu: {
