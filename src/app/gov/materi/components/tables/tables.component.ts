@@ -100,7 +100,7 @@ export class Tables {
       .map(res => res.json())
       .subscribe(data => {
         for (var i = data.data.length - 1; i >= 0; i--) {
-          data.data[i].link = "<a target='_blank' href='" + data.data[i].file + "'> Unduh </a><a target='_blank' href='" + data.data[i].file + "'> Update</a>";
+          data.data[i].link = "<a target='_blank' href='" + data.data[i].file + "'> Unduh </a>";
         }
         localStorage.setItem('id_token', data.token);
         localStorage.setItem('materi', JSON.stringify(data.data));
@@ -128,15 +128,27 @@ export class Tables {
     this.loading = true;
     this.submit = true;
     this.makeFileRequest(this.data.urlAddMateri, [], this.filesToUpload).then((result) => {
-        console.log(result);
+        this.data.showMessage("Berhasil Menambahkan Materi");
+        this.loading = false;
+        this.add = false;
+        this.getMateriFunction();
+        this.clearForm();
     }, (error) => {
-        console.error(error);
+        this.submit = false;
+        this.data.showMessage(error);
+        this.loading = false;
+        this.add = false;
     });
   }
  
   fileChangeEvent(fileInput: any){
-      this.filesToUpload = <Array<File>> fileInput.target.files;
-      console.log(this.filesToUpload);
+      if (fileInput.target.files[0].type != 'application/pdf') {
+        this.data.showMessageError('Format file tidak pdf, silahkan ubah file ke bentuk pdf. ');
+        this.filesToUpload = null;
+      }else{
+        this.filesToUpload = <Array<File>> fileInput.target.files;
+        this.submit = true;
+      }
   }
  
   makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
@@ -162,6 +174,7 @@ export class Tables {
           xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('id_token')); 
           xhr.send(formData);
       });
+
   }
 
   private deleteMateriFunction() {
