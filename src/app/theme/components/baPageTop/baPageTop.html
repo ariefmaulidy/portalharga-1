@@ -9,6 +9,8 @@
       </a>
       <ul class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
         <!-- <li class="dropdown-item"><a href ><i class="fa fa-user"></i>Profile</a></li> -->
+        <li class="dropdown-item"><b>{{decode.user_data.name}}</b></li>
+        <li class="dropdown-item"><small>{{decode.user_data.username}}</small></li>
         <li class="dropdown-item"><a href (click)="signout()"><i class="fa fa-power-off"></i>Sign out</a></li>
       </ul>
     </div>

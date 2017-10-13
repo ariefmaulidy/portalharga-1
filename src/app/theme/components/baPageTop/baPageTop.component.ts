@@ -20,7 +20,7 @@ export class BaPageTop {
       this.isMenuCollapsed = isCollapsed;
     });
     this.decode = this.jwtHelper.decodeToken(localStorage.getItem('id_token'));
-
+    console.log(this.decode.user_data);
     if (this.decode.user_data.picture) {
       this.photo = this.decode.user_data.picture;
     }else{

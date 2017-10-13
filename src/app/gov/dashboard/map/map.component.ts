@@ -20,9 +20,9 @@ export class Maps {
 
   public interval;
 
-  public day = 99;
+  public day = 0;
 
-  public url = this.data.urlGetLaporanHarga;
+  public url = this.data.urlGetLaporanHargaDay + '0';
   public type = "infoHarga";
   public titleFeed = "Info Harga";
 
@@ -68,10 +68,14 @@ export class Maps {
   public setType(type){
     this.type = type;
     if (type == 'infoHarga') {
-      this.url = this.data.urlGetLaporanHargaDay + this.day;
       if (this.day == 99) {
         this.url = this.data.urlGetLaporanHarga;
+      }else if(this.day == 7){
+        this.url = this.data.urlGetLaporanHargaWeek;
+      }else if(this.day == 30){
+        this.url = this.data.urlGetLaporanHargaMonth;
       }
+      console.log(this.url);
       this.titleFeed = 'INFO HARGA';
     }else{
       this.url = this.data.urlGetProduksi;
@@ -89,6 +93,10 @@ export class Maps {
     this.url = this.data.urlGetLaporanHargaDay + this.day;
     if (this.day == 99) {
       this.url = this.data.urlGetLaporanHarga;
+    }else if(this.day == 7){
+      this.url = this.data.urlGetLaporanHargaWeek;
+    }else if(this.day == 30){
+      this.url = this.data.urlGetLaporanHargaMonth;
     }
     this.getMarkerDataFunction();
   }
@@ -201,15 +209,15 @@ export class Maps {
           length = 0;
         }
 
-        if (JSON.stringify(data.data) == '[]') {
-            this.clearMarker;
-            this.data.showMessageSuccess("Data Kosong");
-        }
-
         if (length != JSON.stringify(data.data).length) {
           localStorage.setItem(this.type, JSON.stringify(data.data));
           localStorage.setItem('id_token', data.token);          
           this.loadMarker();
+
+          if (JSON.stringify(data.data) == '[]') {
+              this.clearMarker;
+              this.data.showMessageSuccess("Data Kosong");
+          }
 
           if (data.status == 200) {
             this.data.showMessageSuccess("Memperbaharui Data");

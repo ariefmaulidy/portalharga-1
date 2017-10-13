@@ -56,7 +56,7 @@ export class Tables {
     },
     columns: {
       name: {
-        title: 'Nama Materi',
+        title: 'User Uploader',
         type: 'string'
       },
       judul: {

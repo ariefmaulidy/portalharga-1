@@ -35,7 +35,9 @@ export class DataService {
   public urlAddLaporanHarga       = this.baseUrl + '/laporanHarga/add';
   public urlUpdateLaporanHarga    = this.baseUrl + '/laporanHarga/update';
   public urlDeleteLaporanHarga    = this.baseUrl + '/laporanHarga/delete';
-  
+  public urlGetLaporanHargaWeek   = this.baseUrl + '/laporanHarga/getWeek'
+  public urlGetLaporanHargaMonth  = this.baseUrl + '/laporanHarga/getMonth'
+
   //--produksi
   public urlGetProduksi       = this.baseUrl + '/produksi/get/';
   public urlAddProduksi       = this.baseUrl + '/produksi/add';
